@@ -41,11 +41,13 @@ echo                        Seleccion de Tamaño de Matriz
 echo ===============================================================================
 echo 1.- Matriz 2x2
 echo 2.- Matriz 3x3
+echo 3.- Matriz 4x4
 echo ===============================================================================
 set /p size="Elige el tamaño de la matriz (1 o 2): "
 
 if "%size%" == "1" goto :leer_matriz_2x2
 if "%size%" == "2" goto :leer_matriz_3x3
+if "%size%" == "3" goto :leer_matriz_4x4
 echo. Opción no válida
 pause
 goto seleccionar_matriz
@@ -84,6 +86,35 @@ set /p m23="Valor 6 [2,3]: "
 set /p m31="Valor 7 [3,1]: "
 set /p m32="Valor 8 [3,2]: "
 set /p m33="Valor 9 [3,3]: "
+goto :eof
+
+:leer_matriz_4x4
+cls
+echo ===============================================================================
+echo                           Estructura de la Matriz 4x4
+echo ===============================================================================
+echo [  1   2   3   4 ]
+echo [  5   6   7   8 ]
+echo [  9  10  11  12 ]
+echo [ 13  14  15  16 ]
+echo ------------------------------------------------------------------------------
+echo Ingresa los valores de la matriz 3x3:
+set /p m11="Valor 1 [1,1]: "
+set /p m12="Valor 2 [1,2]: "
+set /p m13="Valor 3 [1,3]: "
+set /p m14="Valor 4 [1,4]: "
+set /p m21="Valor 5 [2,1]: "
+set /p m22="Valor 6 [2,2]: "
+set /p m23="Valor 7 [2,3]: "
+set /p m24="Valor 8 [2,4]: "
+set /p m31="Valor 9 [3,1]: "
+set /p m32="Valor 10 [3,2]: "
+set /p m33="Valor 11 [3,3]: "
+set /p m34="Valor 12 [3,4]: "
+set /p m41="Valor 13 [4,1]: "
+set /p m42="Valor 14 [4,2]: "
+set /p m43="Valor 15 [4,3]: "
+set /p m44="Valor 16 [4,4]: "
 goto :eof
 
 :leer_segunda_matriz_2x2
@@ -193,6 +224,19 @@ if "%size%" == "1" (
     echo [ !m11!  !m21!  !m31! ]
     echo [ !m12!  !m22!  !m32! ]
     echo [ !m13!  !m23!  !m33! ]
+    echo ===============================================================================
+    echo 3.- Regresar al Menu Principal
+    echo ===============================================================================
+    set /p return="Elige el numero de la opcion que quieras: "
+    if "%return%" == "3" goto start
+    goto transpuesta
+)else if "%size%" == "3" (
+    echo ------------------------------------------------------------------------------
+    echo La transpuesta de la matriz es:
+    echo [ !m11!  !m21!  !m31! !m41! ]
+    echo [ !m12!  !m22!  !m32! !m42! ]
+    echo [ !m13!  !m23!  !m33! !m43! ]
+    echo [ !m14!  !m24!  !m34! !m44! ]
     echo ===============================================================================
     echo 3.- Regresar al Menu Principal
     echo ===============================================================================
@@ -391,6 +435,142 @@ if "%size%" == "1" (
     echo [ !prod11!/!det!  !prod12!/!det!  !prod13!/!det! ]
     echo [ !prod21!/!det!  !prod22!/!det!  !prod23!/!det! ]
     echo [ !prod31!/!det!  !prod32!/!det!  !prod33!/!det! ]
+    echo ===============================================================================
+    echo 3.- Regresar al Menú Principal
+    echo ===============================================================================
+    set /p return="Elige el numero de la opcion que quieras: "
+    if "%return%" == "3" goto start
+    goto inversa
+)else if "%size%" == "3" (
+    set /a diagonal1=!m44! * !m22! * !m33!
+    set /a diagonal2=!m34! * !m23! * !m42!
+    set /a diagonal3=!m43! * !m24! * !m32!
+    set /a diagonal4=!m42! * !m33! * !m24!
+    set /a diagonal5=!m43! * !m34! * !m22!
+    set /a diagonal6=!m44! * !m32! * !m23!
+    set /a x1=!diagonal1! + !diagonal2! + !diagonal3! - !diagonal4! - !diagonal5! - !diagonal6!
+    set /a diagonal7=!m44! * !m21! * !m33!
+    set /a diagonal8=!m34! * !m23! * !m41!
+    set /a diagonal9=!m43! * !m24! * !m31!
+    set /a diagonal10=!m41! * !m33! * !m24!
+    set /a diagonal11=!m43! * !m34! * !m21!
+    set /a diagonal12=!m44! * !m31! * !m23!
+    set /a x2=!diagonal7! + !diagonal8! + !diagonal9! - !diagonal10! - !diagonal11! - !diagonal12!
+    set /a diagonal13=!m44! * !m21! * !m32!
+    set /a diagonal14=!m34! * !m22! * !m41!
+    set /a diagonal15=!m42! * !m24! * !m31!
+    set /a diagonal16=!m41! * !m32! * !m24!
+    set /a diagonal17=!m42! * !m34! * !m21!
+    set /a diagonal18=!m44! * !m31! * !m22!
+    set /a x3=!diagonal13! + !diagonal14! + !diagonal15! - !diagonal16! - !diagonal17! - !diagonal18!
+    set /a diagonal19=!m43! * !m21! * !m32!
+    set /a diagonal20=!m33! * !m22! * !m41!
+    set /a diagonal21=!m42! * !m23! * !m31!
+    set /a diagonal22=!m41! * !m32! * !m23!
+    set /a diagonal23=!m42! * !m33! * !m21!
+    set /a diagonal24=!m43! * !m31! * !m22!
+    set /a x4=!diagonal19! + !diagonal20! + !diagonal21! - !diagonal22! - !diagonal23! - !diagonal24!
+    set /a diagonal25=!m44! * !m12! * !m33!
+    set /a diagonal26=!m34! * !m13! * !m42!
+    set /a diagonal27=!m43! * !m14! * !m32!
+    set /a diagonal28=!m42! * !m33! * !m14!
+    set /a diagonal29=!m43! * !m34! * !m12!
+    set /a diagonal30=!m44! * !m32! * !m23!
+    set /a x5=!diagonal25! + !diagonal26! + !diagonal27! - !diagonal28! - !diagonal29! - !diagonal30!
+    set /a diagonal31=!m44! * !m11! * !m33!
+    set /a diagonal32=!m34! * !m13! * !m41!
+    set /a diagonal33=!m43! * !m14! * !m31!
+    set /a diagonal34=!m41! * !m33! * !m14!
+    set /a diagonal35=!m43! * !m34! * !m11!
+    set /a diagonal36=!m44! * !m31! * !m13!
+    set /a x6=!diagonal31! + !diagonal32! + !diagonal33! - !diagonal34! - !diagonal35! - !diagonal36!
+    set /a diagonal37=!m44! * !m11! * !m32!
+    set /a diagonal38=!m34! * !m12! * !m41!
+    set /a diagonal39=!m42! * !m14! * !m31!
+    set /a diagonal40=!m41! * !m32! * !m14!
+    set /a diagonal41=!m42! * !m34! * !m11!
+    set /a diagonal42=!m44! * !m31! * !m12!
+    set /a x7=!diagonal37! + !diagonal38! + !diagonal39! - !diagonal40! - !diagonal41! - !diagonal42!
+    set /a diagonal43=!m43! * !m11! * !m32!
+    set /a diagonal44=!m33! * !m12! * !m41!
+    set /a diagonal45=!m42! * !m13! * !m31!
+    set /a diagonal46=!m41! * !m32! * !m13!
+    set /a diagonal47=!m42! * !m33! * !m11!
+    set /a diagonal48=!m43! * !m31! * !m12!
+    set /a x8=!diagonal43! + !diagonal44! + !diagonal45! - !diagonal46! - !diagonal47! - !diagonal48!
+    set /a diagonal49=!m44! * !m22! * !m13!
+    set /a diagonal50=!m14! * !m23! * !m42!
+    set /a diagonal51=!m43! * !m24! * !m12!
+    set /a diagonal52=!m42! * !m13! * !m24!
+    set /a diagonal53=!m43! * !m14! * !m22!
+    set /a diagonal54=!m44! * !m12! * !m23!
+    set /a x9=!diagonal49! + !diagonal50! + !diagonal51! - !diagonal52! - !diagonal53! - !diagonal54!
+    set /a diagonal55=!m44! * !m21! * !m13!
+    set /a diagonal56=!m14! * !m23! * !m41!
+    set /a diagonal57=!m43! * !m24! * !m11!
+    set /a diagonal58=!m41! * !m13! * !m24!
+    set /a diagonal59=!m43! * !m14! * !m21!
+    set /a diagonal60=!m44! * !m11! * !m23!
+    set /a x10=!diagonal55! + !diagonal56! + !diagonal57! - !diagonal158! - !diagonal59! - !diagonal60!
+    set /a diagonal61=!m44! * !m21! * !m12!
+    set /a diagonal62=!m14! * !m22! * !m41!
+    set /a diagonal63=!m42! * !m24! * !m11!
+    set /a diagonal64=!m41! * !m12! * !m24!
+    set /a diagonal65=!m42! * !m14! * !m21!
+    set /a diagonal66=!m44! * !m11! * !m22!
+    set /a x11=!diagonal61! + !diagonal62! + !diagonal63! - !diagonal64! - !diagonal65! - !diagonal66!
+    set /a diagonal67=!m43! * !m21! * !m12!
+    set /a diagonal68=!m13! * !m22! * !m41!
+    set /a diagonal69=!m42! * !m23! * !m11!
+    set /a diagonal70=!m41! * !m12! * !m23!
+    set /a diagonal71=!m42! * !m13! * !m21!
+    set /a diagonal72=!m43! * !m11! * !m22!
+    set /a x12=!diagonal67! + !diagonal68! + !diagonal69! - !diagonal70! - !diagonal71! - !diagonal72!
+    set /a diagonal73=!m14! * !m22! * !m33!
+    set /a diagonal74=!m34! * !m23! * !m12!
+    set /a diagonal75=!m13! * !m24! * !m32!
+    set /a diagonal76=!m12! * !m33! * !m24!
+    set /a diagonal77=!m13! * !m34! * !m22!
+    set /a diagonal78=!m14! * !m32! * !m23!
+    set /a x13=!diagonal73! + !diagonal74! + !diagonal75! - !diagonal76! - !diagonal77! - !diagonal78!
+    set /a diagonal79=!m14! * !m21! * !m33!
+    set /a diagonal80=!m34! * !m23! * !m11!
+    set /a diagonal81=!m13! * !m24! * !m31!
+    set /a diagonal82=!m11! * !m33! * !m24!
+    set /a diagonal83=!m13! * !m34! * !m21!
+    set /a diagonal84=!m14! * !m31! * !m23!
+    set /a x14=!diagonal79! + !diagonal80! + !diagonal81! - !diagonal82! - !diagonal83! - !diagonal84!
+    set /a diagonal85=!m14! * !m21! * !m32!
+    set /a diagonal86=!m34! * !m22! * !m11!
+    set /a diagonal87=!m12! * !m24! * !m31!
+    set /a diagonal88=!m11! * !m32! * !m24!
+    set /a diagonal89=!m12! * !m34! * !m21!
+    set /a diagonal90=!m14! * !m31! * !m22!
+    set /a x15=!diagonal85! + !diagonal86! + !diagonal87! - !diagonal88! - !diagonal89! - !diagonal90!
+    set /a diagonal91=!m13! * !m21! * !m32!
+    set /a diagonal92=!m33! * !m22! * !m11!
+    set /a diagonal93=!m12! * !m23! * !m31!
+    set /a diagonal94=!m11! * !m32! * !m23!
+    set /a diagonal95=!m12! * !m33! * !m21!
+    set /a diagonal96=!m13! * !m31! * !m22!
+    set /a x16=!diagonal91! + !diagonal92! + !diagonal93! - !diagonal94! - !diagonal95! - !diagonal96!
+    set /a y1= !m11! * !x1!
+    set /a y2= -!m12! * !x2!
+    set /a y3= !m13! * !x3!
+    set /a y4= -!m14! * !x4!
+    set /a det= !y1!+!y2!+!y3!+!y4!
+    echo ------------------------------------------------------------------------------
+    echo la adjunta es:
+    echo [  !x1!   !x2!   !x3!  !x4! ]
+    echo [  !x5!   !x6!   !x7!  !x8! ]
+    echo [  !x9!  !x10!  !x11! !x12! ]
+    echo [ !x13!  !x14!  !x15! !x16! ]
+    echo ------------------------------------------------------------------------------
+    echo la inversa es:
+    echo [ !x1!/!det!  !x5!/!det!   !x9!/!det!  !x13!/!det! ]
+    echo [ !x2!/!det!  !x6!/!det!   !x10!/!det! !x14!/!det! ]
+    echo [ !x3!/!det!  !x7!/!det!   !x11!/!det! !x12!/!det! ]
+    echo [ !x4!/!det!  !x18!/!det!  !x12!/!det! !x16!/!det! ]
     echo ===============================================================================
     echo 3.- Regresar al Menú Principal
     echo ===============================================================================
